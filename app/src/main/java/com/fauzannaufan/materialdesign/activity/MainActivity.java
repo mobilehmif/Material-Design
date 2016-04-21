@@ -16,26 +16,24 @@ import com.fauzannaufan.materialdesign.R;
 
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
-    private static String TAG = MainActivity.class.getSimpleName();
-
-    private Toolbar mToolbar;
-    private FragmentDrawer drawerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
-        drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        FragmentDrawer drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
         drawerFragment.setDrawerListener(this);
 
-        //displayView(0);
+        displayView(0);
     }
 
     @Override
@@ -98,7 +96,9 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             fragmentTransaction.commit();
 
             // set the toolbar title
-            getSupportActionBar().setTitle(title);
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setTitle(title);
+            }
         }
     }
 }

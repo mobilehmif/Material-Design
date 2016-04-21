@@ -1,6 +1,5 @@
 package com.fauzannaufan.materialdesign.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,15 +21,8 @@ public class MessagesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_messages, container, false);
-
         // Inflate the layout for this fragment
-        return rootView;
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+        return inflater.inflate(R.layout.fragment_messages, container, false);
     }
 
     @Override

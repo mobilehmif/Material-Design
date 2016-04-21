@@ -19,4 +19,12 @@
     <string name="title_messages">Messages</string>
     <string name="title_friends">Friends</string>
     <string name="title_home">Home</string>
+
+    <string name="home">HOME</string>
+    <string name="friends">FRIENDS</string>
+    <string name="messages">MESSAGES</string>
+
+    <string name="message_home">Edit fragment_home.xml to change the appearance</string>
+    <string name="message_friends">Edit fragment_friends.xml to change the appearance</string>
+    <string name="message_messages">Edit fragment_messages.xml to change the appearance</string>
 </resources>
