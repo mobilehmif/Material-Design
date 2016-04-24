@@ -73,7 +73,16 @@ public class FragmentDrawer extends Fragment {
         adapter = new NavigationDrawerAdapter(getActivity(), getData());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                drawerListener.onDrawerItemSelected(view, position);
+                mDrawerLayout.closeDrawer(containerView);
+            }
 
+            @Override
+            public void onLongClick(View view, int position) {}
+        }));
 
         return layout;
     }
@@ -110,12 +119,12 @@ public class FragmentDrawer extends Fragment {
         });
     }
 
-    static class RecyclerTourchListener implements RecyclerView.OnItemTouchListener {
+    static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
         private GestureDetector gestureDetector;
         private ClickListener clickListener;
 
-        public RecyclerTourchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
             this.clickListener = clickListener;
             gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override
@@ -136,8 +145,8 @@ public class FragmentDrawer extends Fragment {
         @Override
         public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
             View child = rv.findChildViewUnder(e.getX(), e.getY());
-            if (child != null && clickListener != null) {
-                clickListener.onLongClick(child, rv.getChildAdapterPosition(child));
+            if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
+                clickListener.onClick(child, rv.getChildAdapterPosition(child));
             }
 
             return false;
